@@ -1,0 +1,37 @@
+{
+  "name": "@toanthang/vn-propfin-llm-benchmark",
+  "version": "1.0.0",
+  "description": "Open-source evaluation framework and dataset for LLM factuality, citation fidelity, and financial amortization reasoning in low-resource domains.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "eval:sample": "ts-node src/evaluator.ts --dataset ./data/ground_truth_policies_sample.json",
+    "test": "vitest run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lequangtoanthang/vn-propfin-llm-benchmark.git"
+  },
+  "homepage": "https://toanthang.me/research",
+  "keywords": [
+    "llm-benchmark",
+    "factuality",
+    "citation-reliability",
+    "hallucination-mitigation",
+    "financial-reasoning",
+    "vietnamese-dataset",
+    "anthropic-claude"
+  ],
+  "author": "Lê Quang Toàn Thắng <info@toanthang.me> (https://toanthang.me)",
+  "license": "MIT",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.36.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.0"
+  }
+}
