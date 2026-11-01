@@ -1,6 +1,6 @@
 {
   "name": "@toanthang/vn-propfin-llm-benchmark",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Open-source evaluation framework and dataset for LLM factuality, citation fidelity, and financial amortization reasoning in low-resource domains.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

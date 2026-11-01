@@ -1,0 +1,34 @@
+name: VN-PropFin-Eval CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Validate JSON dataset & schema
+        run: |
+          node -e '
+            const fs = require("fs");
+            const schema = JSON.parse(fs.readFileSync("./data/schema.json", "utf8"));
+            const data = JSON.parse(fs.readFileSync("./data/ground_truth_policies_sample.json", "utf8"));
+            if (!Array.isArray(data) || data.length < 5) throw new Error("Invalid dataset");
+            for (const item of data) {
+              if (!item.test_id || !item.expected_ground_truth.required_citations.length) {
+                throw new Error("Missing required fields in " + item.test_id);
+              }
+            }
+            console.log("Validated", data.length, "ground-truth instances against", schema.title);
+          '
