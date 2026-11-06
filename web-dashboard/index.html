@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="VN-PropFin-Eval: Open-source evaluation harness and curated ground-truth dataset for measuring LLM factuality, citation reliability, and financial reasoning in emerging-market legal & real estate domains.">
+<meta property="og:title" content="VN-PropFin-Eval — LLM Factuality & Citation Reliability Benchmark">
+<meta property="og:description" content="Open-source evaluation framework, longitudinal dataset (2014–2026), and deterministic cashflow verification engine for high-stakes Vietnamese legal & financial AI.">
+<meta property="og:url" content="https://toanthang.me/research/">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://toanthang.me/research/">
+<title>VN-PropFin-Eval — LLM Factuality &amp; Citation Reliability Benchmark | TOANTHANG.ME</title>
+<link rel="stylesheet" href="./research.css?v=2">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<nav aria-label="Main navigation">
+  <div class="container navbar">
+    <div class="brand-wrap">
+      <a class="brand" href="/research/">TOANTHANG / AI RESEARCH</a>
+      <span class="badge-pill">v1.0.2 · MIT License</span>
+    </div>
+    <div class="links">
+      <a href="#problem">Problem</a>
+      <a href="#architecture">Architecture</a>
+      <a href="#metrics">Metrics</a>
+      <a href="#dataset">Dataset</a>
+      <a href="#quickstart">Quick Start</a>
+      <a href="#roadmap">Roadmap</a>
+      <a class="nav-gh" href="https://github.com/lequangtoanthang/vn-propfin-llm-benchmark" target="_blank" rel="noopener noreferrer">GitHub Repo ↗</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main-content" tabindex="-1">
+  <header class="hero">
+    <div class="container">
+      <div class="badge-row">
+        <span class="eyebrow-tag">OPEN-SOURCE EVALUATION HARNESS &amp; DATASET</span>
+        <a class="eyebrow-link" href="https://github.com/lequangtoanthang/vn-propfin-llm-benchmark/releases/tag/v1.0.2" target="_blank" rel="noopener noreferrer">Release v1.0.2</a>
+        <a class="eyebrow-link" href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener noreferrer">MIT License</a>
+      </div>
+      <h1>VN-PropFin-Eval: LLM Factuality &amp; Citation Reliability Benchmark</h1>
+      <p class="hero-sub">
+        An open-source evaluation harness, deterministic financial verification engine, and longitudinal ground-truth corpus (2014–2026) designed to measure <strong>citation fidelity</strong>, <strong>hallucination resistance</strong>, and <strong>multi-step amortization reasoning</strong> in high-stakes Vietnamese regulatory and real estate domains.
+      </p>
+      <div class="actions">
+        <a class="btn primary" href="https://github.com/lequangtoanthang/vn-propfin-llm-benchmark" target="_blank" rel="noopener noreferrer">
+          <svg class="icon" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
+          View Open-Source Benchmark &amp; Dataset on GitHub
+        </a>
+        <a class="btn secondary" href="#dataset">Inspect Ground-Truth Corpus</a>
+        <a class="btn secondary" href="https://github.com/lequangtoanthang/vn-propfin-llm-benchmark/releases" target="_blank" rel="noopener noreferrer">Releases (v1.0.2)</a>
+      </div>
+
+      <div class="meta-grid">
+        <div class="meta-item">
+          <span class="meta-label">PACKAGE</span>
+          <strong><code>@toanthang/vn-propfin-llm-benchmark</code></strong>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">CORPUS TIMESPAN</span>
+          <strong>2014–2026 Longitudinal Policies &amp; Statutes</strong>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">VERIFICATION ENGINE</span>
+          <strong>Deterministic TypeScript / Node.js Harness</strong>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">LICENSE</span>
+          <strong>MIT (OSI Approved)</strong>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="problem">
+    <div class="container">
+      <div class="eyebrow">01 / Problem Statement</div>
+      <h2>Why Frontier LLMs Drift in Localized Legal &amp; Financial Ecosystems</h2>
+      <p class="lead">
+        While frontier Large Language Models excel at general English benchmarks (MMLU, GSM8K), they exhibit severe <strong>citation hallucination</strong> and <strong>numerical drift</strong> when deployed on contract-heavy Southeast Asian property law, multi-tier payment schedules, and floating-rate mortgage amortization.
+      </p>
+      <div class="cards">
+        <div class="card">
+          <small>FAILURE MODE 01</small>
+          <h3>Phantom Statutory Citations</h3>
+          <p>Models frequently attribute fabricated clauses or outdated thresholds to real statutory codes such as the <strong>Vietnam Land Law 2024</strong>, <strong>Housing Law 2023</strong>, and <strong>Real Estate Business Law 2023</strong> (e.g., misstating deposit caps or foreign ownership quotas).</p>
+        </div>
+        <div class="card">
+          <small>FAILURE MODE 02</small>
+          <h3>Temporal Policy Conflation</h3>
+          <p>In multi-document RAG pipelines spanning 2014–2026 developer sales policies (<em>CSBH</em>), models conflate historical phases or illegally combine mutually exclusive incentives—such as applying both a 0% interest subsidy and an upfront early-payment discount simultaneously.</p>
+        </div>
+        <div class="card">
+          <small>FAILURE MODE 03</small>
+          <h3>Amortization Arithmetic Drift</h3>
+          <p>Free-form token generation fails to maintain exact precision across principal grace periods (<em>ân hạn nợ gốc</em>), daily early-payment cashflow discounts (<code>ACT/365</code>), deferred-construction split pricing (<em>giãn xây</em>), and statutory maintenance fees (<em>KPBT</em>).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="architecture">
+    <div class="container">
+      <div class="eyebrow">02 / Architecture &amp; Repository Structure</div>
+      <h2>Deterministic Programmatic Verification</h2>
+      <p class="lead">
+        <code>vn-propfin-llm-benchmark</code> pairs a curated ground-truth corpus drawn from 12+ years of real-world transaction schedules and statutory codes with a deterministic TypeScript verification harness.
+      </p>
+
+      <div class="arch-grid">
+        <div class="arch-card">
+          <div class="arch-head">
+            <span class="file-tag">data/ground_truth_policies_sample.json</span>
+            <a href="https://github.com/lequangtoanthang/vn-propfin-llm-benchmark/tree/main/data" target="_blank" rel="noopener noreferrer">View source ↗</a>
+          </div>
+          <h3>Longitudinal Ground-Truth Corpus</h3>
+          <p>Structured JSON schemas validated against <code>data/schema.json</code> covering multi-tier sales policies, statutory legal articles, deferred construction schedules, and multi-bank lending parameters.</p>
+          <ul class="spec-list">
+            <li>Exact source context snippets &amp; document provenance IDs</li>
+            <li>Mandatory verbatim/normalized citation spans (<code>required_citations</code>)</li>
+            <li>Adversarial trap definitions (<code>forbidden_hallucinations</code>)</li>
+          </ul>
+        </div>
+
+        <div class="arch-card">
+          <div class="arch-head">
+            <span class="file-tag">src/cashflow_verifier.ts</span>
+            <a href="https://github.com/lequangtoanthang/vn-propfin-llm-benchmark/blob/main/src/cashflow_verifier.ts" target="_blank" rel="noopener noreferrer">View source ↗</a>
+          </div>
+          <h3>Deterministic Financial Verifier (<code>CashflowVerifier</code>)</h3>
+          <p>Programmatic engine that computes exact mathematical ground truth for loan amortization, interest rate subsidies, and NPV cashflow discounts to grade LLM-generated financial tables.</p>
+          <ul class="spec-list">
+            <li>Upfront discount cascade &amp; <code>ACT/365</code> early-payment interest math</li>
+            <li>Split land vs. construction VAT &amp; post-discount KPBT (0.5% / 2.0%)</li>
+            <li>24–36 month principal grace period &amp; floating-rate schedules</li>
+          </ul>
+        </div>
+
+        <div class="arch-card">
+          <div class="arch-head">
+            <span class="file-tag">src/evaluator.ts</span>
+            <a href="https://github.com/lequangtoanthang/vn-propfin-llm-benchmark/blob/main/src/evaluator.ts" target="_blank" rel="noopener noreferrer">View source ↗</a>
+          </div>
+          <h3>Strict Citation Attribution Scorer (<code>CitationEval</code>)</h3>
+          <p>Evaluates whether model outputs strictly ground every numerical claim and legal condition in the provided context window without extrapolating unsupported terms.</p>
+          <ul class="spec-list">
+            <li>Normalized Vietnamese diacritic-aware span verification</li>
+            <li>Zero-tolerance penalty for mutually exclusive policy blending</li>
+            <li>Supports Zero-Shot, Long-Context RAG, and Tool-Use (MCP) runs</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="metrics">
+    <div class="container">
+      <div class="eyebrow">03 / Evaluation Metrics &amp; Reference Baselines</div>
+      <h2>Quantitative Reliability Thresholds</h2>
+      <p class="lead">
+        Every evaluation run grades model responses across three orthogonal axes: citation grounding precision, hallucination containment, and exact financial arithmetic.
+      </p>
+
+      <div class="table-wrap">
+        <table class="bench-table">
+          <thead>
+            <tr>
+              <th>Metric</th>
+              <th>Code</th>
+              <th>Formal Definition</th>
+              <th>Production Target</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Strict Citation Precision</strong></td>
+              <td><code>SCP</code></td>
+              <td>Percentage of required statutory/policy clauses accurately cited and grounded in exact source document spans</td>
+              <td><span class="pill-ok">&gt; 98.5%</span></td>
+            </tr>
+            <tr>
+              <td><strong>Zero-Hallucination Rate</strong></td>
+              <td><code>ZHR</code></td>
+              <td>Percentage of evaluation items containing zero ungrounded claims or forbidden incentive combinations</td>
+              <td><span class="pill-ok">&gt; 99.0%</span></td>
+            </tr>
+            <tr>
+              <td><strong>Amortization Exact Match</strong></td>
+              <td><code>AEM</code></td>
+              <td>Numerical accuracy within <code>±0.01%</code> tolerance against <code>CashflowVerifier</code> ground truth across all cashflow lines</td>
+              <td><span class="pill-ok">100.0%</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="subhead">Reference Evaluation Harness Comparison (v1.0.2 Sample Suite)</h3>
+      <div class="table-wrap">
+        <table class="bench-table">
+          <thead>
+            <tr>
+              <th>Evaluation Configuration</th>
+              <th>Strict Citation Precision (<code>SCP</code>)</th>
+              <th>Zero-Hallucination Rate (<code>ZHR</code>)</th>
+              <th>Amortization Exact Match (<code>AEM</code>)</th>
+              <th>Primary Bottleneck Observed</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Unassisted Zero-Shot Prompting</strong></td>
+              <td>64.2%</td>
+              <td>62.5%</td>
+              <td>37.5%</td>
+              <td>Hallucinates statutory clause numbers &amp; compounds discounts linearly</td>
+            </tr>
+            <tr>
+              <td><strong>Standard Long-Context RAG</strong></td>
+              <td>91.8%</td>
+              <td>87.5%</td>
+              <td>62.5%</td>
+              <td>Correctly retrieves text but drifts on <code>ACT/365</code> day-count &amp; KPBT base</td>
+            </tr>
+            <tr class="highlight-row">
+              <td><strong>Claude + Deterministic <code>CashflowVerifier</code> Tool Use</strong></td>
+              <td><strong>99.2%</strong></td>
+              <td><strong>100.0%</strong></td>
+              <td><strong>100.0%</strong></td>
+              <td>Deterministic tool verification eliminates arithmetic &amp; policy blending drift</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="dataset">
+    <div class="container">
+      <div class="eyebrow">04 / Interactive Ground-Truth Explorer</div>
+      <h2>Inspect Curated Benchmark Instances</h2>
+      <p class="lead">
+        Select a sample test case from <a href="https://github.com/lequangtoanthang/vn-propfin-llm-benchmark/blob/main/data/ground_truth_policies_sample.json" target="_blank" rel="noopener noreferrer"><code>data/ground_truth_policies_sample.json</code></a> to inspect the source context, evaluation query, deterministic ground truth, and adversarial traps.
+      </p>
+
+      <div class="dataset-tabs" role="tablist" aria-label="Sample benchmark test cases">
+        <button class="tab-btn active" role="tab" aria-selected="true" data-case="0">VN-FIN-2026-001 · Early Payment vs. HTLS</button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-case="1">VN-FIN-2026-002 · Deferred Construction</button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-case="2">VN-FIN-2026-003 · High-Rise vs. Low-Rise KPBT</button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-case="3">VN-LAW-2026-006 · Land &amp; RE Business Law</button>
+      </div>
+
+      <div class="case-viewer" id="case-viewer" aria-live="polite">
+        <div class="case-grid">
+          <div class="case-col">
+            <div class="case-block">
+              <div class="block-label">TEST CASE METADATA</div>
+              <div class="kv-row"><span class="kv-k">Test ID:</span> <code id="cv-id">VN-FIN-2026-001</code></div>
+              <div class="kv-row"><span class="kv-k">Category:</span> <code id="cv-cat">multi_tier_amortization_and_citation</code></div>
+              <div class="kv-row"><span class="kv-k">Source ID:</span> <code id="cv-src">CSBH-VH-2026-Q4</code></div>
+            </div>
+            <div class="case-block">
+              <div class="block-label">SOURCE CONTEXT SNIPPET (VIETNAMESE)</div>
+              <blockquote id="cv-ctx">
+                Khách hàng thanh toán sớm bằng vốn tự có trong vòng 15 ngày kể từ ngày ký HĐMB được hưởng mức chiết khấu 9.5% trên giá gốc trước VAT và KPBT, cộng thêm chiết khấu dòng tiền 11%/năm tính trên số tiền và số ngày thanh toán trước hạn. Phương án vay ngân hàng hỗ trợ lãi suất 0% và ân hạn nợ gốc trong 24 tháng cho tối đa 70% giá trị căn hộ.
+              </blockquote>
+            </div>
+            <div class="case-block">
+              <div class="block-label">EVALUATION QUERY</div>
+              <p id="cv-query" class="case-query">
+                Tính số tiền thanh toán thực tế (chưa gồm VAT &amp; KPBT) cho sản phẩm có giá gốc 10 tỷ VNĐ nếu khách chọn phương án thanh toán sớm trong 15 ngày (giả sử thanh toán sớm trung bình 300 ngày trên 70% giá trị), và trích dẫn chính xác điều khoản áp dụng.
+              </p>
+            </div>
+          </div>
+          <div class="case-col">
+            <div class="case-block code-panel">
+              <div class="block-head">
+                <span class="block-label">EXPECTED DETERMINISTIC GROUND TRUTH (JSON)</span>
+                <a href="https://github.com/lequangtoanthang/vn-propfin-llm-benchmark/blob/main/data/ground_truth_policies_sample.json" target="_blank" rel="noopener noreferrer">Full JSON on GitHub ↗</a>
+              </div>
+              <pre id="cv-json"><code>{
+  "base_price_vnd": 10000000000,
+  "upfront_discount_rate": 0.095,
+  "price_after_upfront_vnd": 9050000000,
+  "early_cashflow_annual_rate": 0.11,
+  "early_payment_days": 300,
+  "early_payment_ratio": 0.70,
+  "early_cashflow_discount_vnd": 632876712,
+  "net_payable_pre_vat_vnd": 8417123288,
+  "required_citations": [
+    "chiết khấu 9.5% trên giá gốc trước VAT và KPBT",
+    "chiết khấu dòng tiền 11%/năm tính trên số tiền và số ngày thanh toán trước hạn"
+  ],
+  "forbidden_hallucinations": [
+    "hưởng đồng thời hỗ trợ lãi suất 0% và chiết khấu thanh toán sớm 9.5%"
+  ]
+}</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="quickstart">
+    <div class="container">
+      <div class="eyebrow">05 / Quick Start &amp; Reproducibility</div>
+      <h2>Run the Evaluation Suite Locally</h2>
+      <p class="lead">
+        Clone the open-source repository from GitHub and run the deterministic verification suite against the ground-truth dataset.
+      </p>
+
+      <div class="code-grid">
+        <div class="code-box">
+          <div class="code-header">
+            <span>1. Installation &amp; CLI Execution</span>
+            <button type="button" class="copy-btn" data-copy="git clone https://github.com/lequangtoanthang/vn-propfin-llm-benchmark.git&#10;cd vn-propfin-llm-benchmark&#10;npm install&#10;npm run eval:sample">Copy CLI</button>
+          </div>
+          <pre><code>git clone https://github.com/lequangtoanthang/vn-propfin-llm-benchmark.git
+cd vn-propfin-llm-benchmark
+npm install
+
+# Run deterministic verifier &amp; sample evaluation suite
+export ANTHROPIC_API_KEY="your-api-key"
+npm run eval:sample
+
+# Run unit tests
+npm test</code></pre>
+        </div>
+
+        <div class="code-box">
+          <div class="code-header">
+            <span>2. Academic &amp; Open-Source Citation (BibTeX)</span>
+            <button type="button" class="copy-btn" data-copy="@software{le2026vnpropfineval,&#10;  author = {Le, Quang Toan Thang},&#10;  title = {VN-PropFin-Eval: Benchmarking LLM Factuality, Citation Reliability, and Financial Reasoning in Emerging Markets},&#10;  year = {2026},&#10;  version = {1.0.2},&#10;  url = {https://toanthang.me/research},&#10;  repository = {https://github.com/lequangtoanthang/vn-propfin-llm-benchmark}&#10;}">Copy BibTeX</button>
+          </div>
+          <pre><code>@software{le2026vnpropfineval,
+  author = {Le, Quang Toan Thang},
+  title = {VN-PropFin-Eval: Benchmarking LLM Factuality, Citation Reliability, and Financial Reasoning in Emerging Markets},
+  year = {2026},
+  version = {1.0.2},
+  url = {https://toanthang.me/research},
+  repository = {https://github.com/lequangtoanthang/vn-propfin-llm-benchmark}
+}</code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="roadmap">
+    <div class="container">
+      <div class="eyebrow">06 / Open-Source Roadmap &amp; Maintainer</div>
+      <h2>Development Milestones (v1.0 → v2.0)</h2>
+      <div class="workflow">
+        <div class="step done">
+          <span class="step-badge">COMPLETED · v1.0.2</span>
+          <strong>Core Schema &amp; Verifier</strong>
+          <p>Release evaluation schema, deterministic <code>CashflowVerifier</code>, <code>CitationEval</code>, and public research portal (<code>toanthang.me/research</code>).</p>
+        </div>
+        <div class="step active">
+          <span class="step-badge">IN PROGRESS · v1.1</span>
+          <strong>1,500+ QA Corpus Expansion</strong>
+          <p>Expand ground-truth dataset to 1,500+ annotated multi-document policy, banking &amp; statutory QA pairs with hard-negative traps.</p>
+        </div>
+        <div class="step">
+          <span class="step-badge">PLANNED · v1.2</span>
+          <strong>MCP Verification Server</strong>
+          <p>Publish an open-source Model Context Protocol (MCP) server for real-time financial &amp; statutory citation verification in agentic workflows.</p>
+        </div>
+        <div class="step">
+          <span class="step-badge">PLANNED · v2.0</span>
+          <strong>CI/CD RAG Regression Suite</strong>
+          <p>Automated regression testing pipeline for evaluating open-source Vietnamese &amp; ASEAN legal/financial RAG frameworks.</p>
+        </div>
+      </div>
+
+      <div class="maintainer-box">
+        <div class="maintainer-info">
+          <div class="eyebrow">PROJECT LEAD &amp; CORE MAINTAINER</div>
+          <h3>Lê Quang Toàn Thắng</h3>
+          <p>
+            Founder &amp; Principal Maintainer of <strong>VN-PropFin-Eval</strong>. Drawing from 12+ years of primary-market real estate financial structuring, contract administration, and regulatory operations in Vietnam (2014–2026) to build open-source, deterministic evaluation infrastructure for reliable AI.
+          </p>
+          <div class="maintainer-links">
+            <a class="btn primary" href="https://github.com/lequangtoanthang/vn-propfin-llm-benchmark" target="_blank" rel="noopener noreferrer">GitHub: lequangtoanthang/vn-propfin-llm-benchmark ↗</a>
+            <a class="btn secondary" href="https://github.com/lequangtoanthang/vn-propfin-llm-benchmark/issues" target="_blank" rel="noopener noreferrer">Open Issues &amp; Roadmap ↗</a>
+            <a class="btn secondary" href="mailto:info@toanthang.me?subject=VN-PropFin-Eval%20Open%20Source%20Benchmark">Contact: info@toanthang.me</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <div>© 2026 <strong>TOANTHANG.ME</strong> · VN-PropFin-Eval Open-Source Benchmark (MIT License)</div>
+    <div class="footer-links">
+      <a href="https://github.com/lequangtoanthang/vn-propfin-llm-benchmark" target="_blank" rel="noopener noreferrer">GitHub Repository</a>
+      <a href="https://github.com/lequangtoanthang/vn-propfin-llm-benchmark/releases" target="_blank" rel="noopener noreferrer">Releases (v1.0.2)</a>
+      <a href="mailto:info@toanthang.me">info@toanthang.me</a>
+    </div>
+  </div>
+</footer>
+
+<script src="./research.js?v=2"></script>
+</body>
+</html>
