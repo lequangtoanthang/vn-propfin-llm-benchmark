@@ -16,3 +16,5 @@ export {
   InstanceScore,
   BenchmarkSummary,
 } from "./evaluator.js";
+
+export { VN_PROPFIN_MCP_TOOLS, McpToolDefinition, executeMcpToolCall } from "./mcp_server.js";
